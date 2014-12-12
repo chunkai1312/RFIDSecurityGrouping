@@ -1,0 +1,94 @@
+<div class="container">
+  <h1 class="text-center"><strong>RFID資訊安全</strong> <small><strong>期末報告分組</strong></small></h1>
+
+  <hr />
+    <div class="text-center">
+      <button class="btn btn-primary" ng-disabled="isDisabled" ng-click="drawLots(5)">開始抽籤</button>
+      <h1 class="text-danger" ng-bind-html="countdownTimer"></h1>
+    <div>  
+  <hr />
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="text-center"><strong>分組名單</strong></h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">組別</th>
+            <th class="text-center">學號</th>
+            <th class="text-center">姓名</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="{{student.group % 2 == 0 ? 'info' : ''}}" ng-repeat="(index, student) in students">
+            <td>第 {{ student.group }} 組</td>
+            <td>{{ student.studentID }}</td>
+            <td>{{ student.name }}</td>
+          </tr>
+      </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <h3 class="text-center"><strong>論文簽筒</strong></h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">論文名稱</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(index, paper) in paperList">
+            <td>{{ index + 1 }}</td>
+            <td class="text-left">{{ paper.title }}</td>
+          </tr>
+      </tbody>
+      </table>
+      
+      <hr />
+      
+      <h3 class="text-center"><strong>順序簽筒</strong></h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">報告順序</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="{{index > 3 ? 'info' : ''}}" ng-repeat="(index, order) in orderList">
+            <td>{{ index + 1 }}</td>
+            <td>{{ order.order }}</td>
+          </tr>
+      </tbody>
+      </table>      
+    </div>    
+  </div>
+  
+  <hr />
+  
+  <h3 id="result" class="text-center"><strong>抽籤結果</strong></h3>
+  <div id="exportable">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-center">組別</th>
+          <th class="text-center">報告論文</th>
+          <th class="text-center">報告順序</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="group in groups">
+          <td>{{ group.group }}</td>
+          <td class="text-left">{{ group.paper }}</td>
+          <td>{{ group.order }}</td>
+        </tr>
+    </tbody>
+    </table>    
+  </div>
+
+  <div style="margin: 50px">
+    <button class="btn btn-primary" ng-disabled="!isDisabled" ng-click="export()">匯出</button>
+  </div> 
+
+</div>
